@@ -1,0 +1,6 @@
+# ignore venv
+venv/
+
+# sfile types
+*.sqlite3
+*.pyc
