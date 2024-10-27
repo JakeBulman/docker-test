@@ -1,6 +1,9 @@
 # ignore venv
 venv/
+#ignore data (postgres)
+data/
 
 # sfile types
+*.sock
 *.sqlite3
 *.pyc

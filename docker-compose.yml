@@ -1,0 +1,36 @@
+services:
+  # db:
+  #   image: postgres:14.5
+  #   restart: always
+  #   volumes:
+  #     - ./data/dv:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+
+  cache:
+    image: redis:7.0.4
+    restart: always
+    volumes:
+    - ./data/cache:/data
+
+  web:
+    build: .
+    command: [  "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+    restart: always
+    volumes:
+      - .:/code
+    environment:
+     - DJANGO_SETTINGS_MODULE=dockerer.settings
+    depends_on:
+      - cache
+
+  nginx:
+    image: nginx:1.23.1
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+    ports:
+      - "80:80"
