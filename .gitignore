@@ -2,6 +2,9 @@
 venv/
 #ignore data (postgres)
 data/
+#ignore static and media
+static/
+media/
 
 # sfile types
 *.sock

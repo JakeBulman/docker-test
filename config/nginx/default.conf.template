@@ -14,4 +14,12 @@ server {
         uwsgi_pass  uwsgi_app;
         proxy_set_header Connection "";
     }
+
+    location /static/ {
+        alias /code/dockerer/static/;
+    }
+
+    location /media/ {
+        alias /code/dockerer/media/;
+    }
 }
