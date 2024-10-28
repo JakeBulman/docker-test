@@ -4,10 +4,18 @@ upstream uwsgi_app {
 }
 
 server {
-    listen      80;
-    server_name www.dockerer.com;
-    error_log   stderr warn;
-    access_log  /dev/stdout main;
+    listen              80;
+    server_name         www.educaproject.com educaproject.com;
+    return 301 https://$host$request_uri;
+    }
+
+server {
+    listen              443 ssl;
+    ssl_certificate     /code/dockerer/ssl/educa.crt;
+    ssl_certificate_key /code/dockerer/ssl/educa.key;
+    server_name         www.educaproject.com educaproject.com;
+    error_log           stderr warn;
+    access_log          /dev/stdout main;
 
     location / {
         include /etc/nginx/uwsgi_params;

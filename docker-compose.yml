@@ -9,11 +9,11 @@ services:
   #     - POSTGRES_USER=postgres
   #     - POSTGRES_PASSWORD=postgres
 
-  cache:
-    image: redis:7.0.4
-    restart: always
-    volumes:
-    - ./data/cache:/data
+  # cache:
+  #   image: redis:7.0.4
+  #   restart: always
+  #   volumes:
+  #   - ./data/cache:/data
 
   web:
     build: .
@@ -23,8 +23,8 @@ services:
       - .:/code
     environment:
      - DJANGO_SETTINGS_MODULE=dockerer.settings
-    depends_on:
-      - cache
+    # depends_on:
+    #   - cache
 
   nginx:
     image: nginx:1.23.1
@@ -34,3 +34,4 @@ services:
       - .:/code
     ports:
       - "80:80"
+      - "443:443"
