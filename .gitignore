@@ -5,6 +5,7 @@ data/
 #ignore static and media
 static/
 media/
+node_modules/
 
 # sfile types
 *.sock

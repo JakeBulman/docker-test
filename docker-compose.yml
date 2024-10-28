@@ -23,8 +23,15 @@ services:
       - .:/code
     environment:
      - DJANGO_SETTINGS_MODULE=dockerer.settings
-    # depends_on:
-    #   - cache
+    develop:
+      watch:
+        - action: sync
+          path: ./dockerer
+          target: /code/dockerer
+          ignore:
+          - node_modules/
+        - action: rebuild
+          path: package.json
 
   nginx:
     image: nginx:1.23.1
